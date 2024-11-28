@@ -1,0 +1,78 @@
+\begin{frame}
+    \frametitle{How a Language Model Works}
+
+    \begin{columns}
+        % Left Column: Bullet Points
+        \column{0.5\textwidth}
+        \begin{itemize}
+            \item <1-> Input Sentence: The model receives a sentence.
+            \item <2-> Tokenization: The sentence is broken into tokens (words/subwords).
+            \item <3-> Transformer: Tokens are processed by the transformer for context and relationships.
+            \item <4-> Prediction: The model predicts the next word.
+            \item <5-> Training: The model improves over time through repeated predictions and learning.
+        \end{itemize}
+
+        % Right Column: Flow Diagram
+        \column{0.5\textwidth}
+        \begin{center}
+            \begin{tikzpicture}[scale=0.7, every node/.style={scale=0.85}]
+                % Input Sentence
+                \visible<1->{
+                    \node[draw, fill=lightblue!50, rounded corners, text=darkblue, align=center, minimum width=5cm] (input) at (0, 2) {
+                        \textbf{Input:} \\
+                        "The cat sat on the"
+                    };
+                }
+
+                % Tokenization
+                \visible<2->{
+                    \node[draw, fill=lightblue!30, rounded corners, text=darkblue, align=center, minimum width=5cm, below=0.5cm of input] (tokenize) {
+                        \textbf{Tokenization:} \\
+                        "The," "cat," "sat," "on," "the"
+                    };
+                }
+
+                % Transformer
+                \visible<3->{
+                    \node[draw, fill=lightblue!20, rounded corners, text=darkblue, align=center, minimum width=5cm, below=0.5cm of tokenize] (transformer) {
+                        \textbf{Transformer:} \\
+                        Understanding context
+                    };
+                }
+
+                % Prediction
+                \visible<4->{
+                    \node[draw, fill=lightblue!10, rounded corners, text=darkblue, align=center, minimum width=5cm, below=0.5cm of transformer] (prediction) {
+                        \textbf{Prediction:} \\
+                        "mat"
+                    };
+                }
+
+                % Training
+                \visible<5->{
+                    \node[draw, dashed, fill=white, text=darkblue, align=center, minimum width=6cm, below=0.5cm of prediction] (training) {
+                        \textbf{Training:} \\
+                        Repeated learning to improve predictions
+                    };
+                }
+                % Arrows
+                \visible<2->{
+                    \draw[->, thick, darkblue] (input.south) -- (tokenize.north);
+                }
+                \visible<3->{
+                     \draw[->, thick, darkblue] (tokenize.south) -- (transformer.north);
+                }
+                \visible<4->{
+                     \draw[->, thick, darkblue] (transformer.south) -- (prediction.north);
+                }
+                \visible<5->{
+                    \draw[->, thick, darkblue] (prediction.south) -- (training.north);
+                }
+                
+               
+               
+                
+            \end{tikzpicture}
+        \end{center}
+    \end{columns}
+\end{frame}

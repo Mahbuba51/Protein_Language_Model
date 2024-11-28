@@ -1,0 +1,40 @@
+\begin{frame}{Challenges of Protein Language Models}
+    \begin{tikzpicture}[
+        node distance=1.5cm,
+        challenge/.style={draw, shading=axis, left color=blue!50, right color=cyan!30, text centered, rounded corners, minimum height=1cm, minimum width=2.5cm},
+        subchallenge/.style={draw, shading=axis, left color=blue!30, right color=purple!30, text centered, rounded corners, minimum height=1cm, minimum width=2.5cm}
+    ]
+        
+        % Central Node (Challenges)
+        \node[challenge, align = center, xshift = -1cm] (challenges) {Challenges};
+        
+        % First level nodes
+        \node[subchallenge, below right=of challenges] (data) {Data Limitations};
+        \node[subchallenge, below left=of challenges] (computational) {Computational Cost};
+        \node[subchallenge, below=of challenges] (biological) {Biological Interpretation};
+        
+        \draw[->] (challenges.south) -- (data);
+        \draw[->] (challenges.south) -- (computational);
+        \draw[->] (challenges.south) -- (biological);
+
+        % Sub-nodes for Computational Cost with Image
+        \pause
+        \node[below=0.3cm of computational] (computational-img1) {\includegraphics[width=1.5cm]{images/computational.png}};
+        \node[subchallenge, below=0.3cm of computational-img1] {High Processing Power};
+        \node[subchallenge, below=1.5cm of computational-img1] {Expensive Resources};
+
+        % Sub-nodes for Biological Interpretation with Image
+        \pause
+        \node[below=0.3cm of biological] (biological-img1) {\includegraphics[width=1.5cm]{images/biological.png}};
+        \node[subchallenge, below=0.3cm of biological-img1] {Hard to Translate};
+        \node[subchallenge, below=1.5cm of biological-img1] {Complex Biological Context};
+
+        % Sub-nodes for Data Limitations with Image
+        \pause
+        \node[below=0.3cm of data] (data-img1) {\includegraphics[width=1.5cm]{images/db.png}};
+        \node[subchallenge, below=0.3cm of data-img1] {Limited Datasets};
+        \node[subchallenge, below=1.5cm of data-img1] {Lack of Data};
+
+
+    \end{tikzpicture}
+\end{frame}

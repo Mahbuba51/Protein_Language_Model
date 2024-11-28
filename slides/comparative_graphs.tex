@@ -1,0 +1,48 @@
+\begin{frame}{Model Comparison: Protein Language Models}
+
+% Title and Subtitle
+\centering
+\textbf{\Large Performance Metrics of PLMs} \\
+\vspace{0.5cm}
+
+% Bar Chart
+\begin{tikzpicture}
+\begin{axis}[
+    width=\textwidth, height=6cm,
+    ybar,
+    bar width=15pt,
+    symbolic x coords={ProtBERT, ESM-1b, AlphaFold},
+    xtick=data,
+    nodes near coords,
+    nodes near coords align={vertical},
+    ymin=0, ymax=100,
+    ylabel={Performance (\%)},
+    xlabel={Protein Language Models},
+    legend pos=south west,
+    legend style={font=\small},
+    title={Comparison of Accuracy and F1 Score},
+    axis x line*=bottom,
+    axis y line*=left,
+    enlarge x limits=0.2
+]
+
+% Accuracy Data
+\addplot[fill=cyan] coordinates {
+    (ProtBERT, 76)   % ProtBERT subcellular localization
+    (ESM-1b, 79)     % ESM-1b subcellular localization
+    (AlphaFold, 95)    % AlphaFold fold prediction (general metric)
+};
+
+% F1 Score Data
+\addplot[fill=orange] coordinates {
+    (ProtBERT, 76)   % ProtBERT subcellular localization
+    (ESM-1b, 77)     % ESM-1b subcellular localization
+    (AlphaFold, 93)    % AlphaFold fold classification
+};
+
+\legend{Accuracy, F1 Score}
+\end{axis}
+\end{tikzpicture}
+
+\end{frame}
+

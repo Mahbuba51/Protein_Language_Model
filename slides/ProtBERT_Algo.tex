@@ -1,0 +1,112 @@
+
+\usetikzlibrary{positioning, shapes.geometric, fit, arrows.meta, patterns}
+\usetikzlibrary{overlay-beamer-styles}
+
+\setbeamercovered{transparent}
+
+\begin{frame}{ProtBERT}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={font=\small}]
+        % Input boxes
+        \node[draw, rectangle, fill= blue!20, rounded corners, minimum size=0.5cm, <1->] (s) at (-5, 5) {S};
+        \node[draw, rectangle,fill= blue!20, rounded corners, minimum size=0.5cm, visible on=<1->] (e) [right=of s] {E};
+        \node[draw, rectangle,fill= blue!20, rounded corners, minimum size=0.5cm, visible on=<1->] (q) [right=of e] {Q};
+        \node[draw, rectangle,fill= blue!20, rounded corners, minimum size=0.5cm, visible on=<1->] (dots) [right=of q] {$\dots$};
+
+        % Input text
+        \node[align=left, right=2cm of dots, visible on=<1->] (input_text) {Input of \\ length $L$};
+
+        % Striped boxes below the input boxes
+        \node[draw, rectangle, pattern=north east lines, minimum size=0.5cm, below = 0.5cm of s, visible on=<2->] (striped1)  {};
+        \node[draw, rectangle, pattern=north east lines, minimum size=0.5cm, visible on=<2->] (striped2) [right=of striped1] {};
+        \node[draw, rectangle, pattern=north east lines, minimum size=0.5cm, visible on=<2->] (striped3) [right=of striped2] {};
+        \node[draw, rectangle, pattern=north east lines, minimum size=0.5cm, visible on=<2->] (striped4) [right=of striped3] {};
+
+        % Tokenization text
+        \node[[align=left,below=0.8 cm of input_text, visible on=<2->] (tokenization_text) {Tokenization \\ \& Encoding};
+
+        % Downward arrows
+        \draw[->, visible on=<2->] (s) -- (striped1);
+        \draw[->, visible on=<2->] (e) -- (striped2);
+        \draw[->, visible on=<2->] (q) -- (striped3);
+        \draw[->, visible on=<2->] (dots) -- (striped4);
+        \draw[->, visible on=<2->] (input_text) -- (tokenization_text)
+
+        % Text on the right of transformer
+        \node[ align=center, below=0.5 cm of tokenization_text, visible on=<3->] (attention) 
+        {Stack of $N$ \\ self-attention layers};
+
+         % Big rectangle for Transformer model
+        \node[draw, rectangle, shading=axis, left color=red!50, right color=blue!30, rounded corners, minimum width=5cm, minimum height=2cm, align=center, left=1.2 cm of attention, visible on=<3->] (transformer) 
+        { Transformer Model\\ \rule{5cm}{0.4pt} \\ Last Hidden Layer};
+
+        % Arrows connecting striped boxes and tokenization text
+        \draw[->, visible on=<3->] (striped1.south) -- (transformer.north);
+        \draw[->, visible on=<3->] (striped2.south) -- (transformer.north);
+        \draw[->, visible on=<3->] (striped3.south) -- (transformer.north);
+        \draw[->, visible on=<3->] (striped4.south) -- (transformer.north);
+
+        
+
+        \draw[->, visible on=<3->] (tokenization_text) -- (attention)
+
+        % Black boxes below Transformer
+        \node[draw, rectangle, fill=black, minimum size=0.2cm, below = 3.5cm of striped1, visible on=<4->] (black1) {};
+        \node[draw, rectangle, fill=black, minimum size=0.2cm, below = 3.5cm of striped2, visible on=<4->] (black2) {};
+        \node[draw, rectangle, fill=black, minimum size=0.2cm, below = 3.5cm of striped3, visible on=<4->] (black3) {};
+        \node[draw, rectangle, fill=black, minimum size=0.2cm, below = 3.5cm of striped4, visible on=<4->] (black4) {};
+
+        % Text "1024" over black boxes
+        \node[above=0.1cm of black1, visible on=<4->] {1024};
+        \node[above=0.1cm of black2, visible on=<4->] {1024};
+        \node[above=0.1cm of black3, visible on=<4->] {1024};
+        \node[above=0.1cm of black4, visible on=<4->] {1024};
+
+        % Black box connections
+        \draw[->, visible on=<4->] (transformer.south) --  (black1.north);
+        \draw[->, visible on=<4->] (transformer.south) --  (black2.north);
+        \draw[->, visible on=<4->] (transformer.south) --  (black3.north);
+        \draw[->, visible on=<4->] (transformer.south) --  (black4.north);
+
+        % Text "L amino-acid embeddings" on the right
+        \node[right=2.6cm of black3, visible on=<4->] (amino) {L amino-acid embeddings};
+
+        \draw[->, visible on=<4->] (attention) -- (amino);
+
+        % Supervised Network text
+        \node[below=0.5cm of amino, visible on=<5->] (supervised) {Supervised Network};
+
+        \draw[->, visible on=<5->] (amino) -- (supervised)
+
+        % CNN layer below black boxes
+        \node[draw, rectangle,shading=axis, left color=green!50, right color=cyan!30, rounded corners, minimum width=5cm, minimum height=0.5cm, align=center, left = 1.2 cm of supervised, visible on=<5->] 
+        (cnn)  {CNN};
+
+        
+
+        % Little rectangles below CNN
+        \node[draw, rectangle,fill= orange!20, rounded corners, minimum size=0.5cm, below = 2cm of black1, visible on=<6->] (h1){H};
+        \node[draw, rectangle,fill= orange!20, rounded corners, minimum size=0.5cm, right=1cm of h1, visible on=<6->] (h2) {H};
+        \node[draw, rectangle,fill= orange!20, rounded corners, minimum size=0.5cm, right=1cm of h2, visible on=<6->] (e) {E};
+        \node[draw, rectangle,fill= orange!20, rounded corners, minimum size=0.5cm, right=1cm of e, visible on=<6->] (dots2) {$\dots$};
+
+        % Text "Token-level classification" on the right
+        \node[right=0.8cm of dots2, visible on=<6->] (classification) {Token-level classification};
+
+        % Arrows from black boxes to CNN
+        \draw[->, visible on=<5->] (black1.south) --  (cnn.north);
+        \draw[->, visible on=<5->] (black2.south) --  (cnn.north);
+        \draw[->, visible on=<5->] (black3.south) --  (cnn.north);
+        \draw[->, visible on=<5->] (black4.south) --  (cnn.north);
+
+        % Arrows from CNN to lower boxes
+        \draw[->, visible on=<6->] (cnn.south) -- (h1.north);
+        \draw[->, visible on=<6->] (cnn.south) -- (h2.north);
+        \draw[->, visible on=<6->] (cnn.south) -- (e.north);
+        \draw[->, visible on=<6->] (cnn.south) -- (dots2.north)
+
+
+        % Arrows from lower boxes to "Token-level classification"
+        \draw[->, visible on=<6->] (supervised) -- (classification);
+    \end{tikzpicture}
+\end{frame}
+

@@ -1,0 +1,20 @@
+\usetikzlibrary {shadows}
+
+\begin{frame}[plain]
+    \begin{columns}[t]
+        % Left column: Full coverage image
+        \column{0.5\textwidth}
+        \begin{tikzpicture}[remember picture, overlay]
+            \node[drop shadow={opacity=1},anchor=north west, inner sep=0, outer sep=0] at (current page.north west) {
+                \includegraphics[ height = \paperheight]{images/Screenshot (44)mid1.png} % Adjust the path
+            };
+        \end{tikzpicture}
+
+        % Right column: Title, author, date
+        \column{0.3\textwidth}
+        {\Huge \textbf{\textcolor{darkblue}{PML}}} \\[.4cm]
+        {\huge \textbf{\textcolor{darkblue}{P}rotein \textcolor{darkblue}{L}anguage \textcolor{darkblue}{M}odel}} \\ [1cm]
+        {\textit{Abony Kamal, Mahbuba Sayed Sinthia}} \\[0.5cm]
+        {\tiny \today}
+    \end{columns}
+\end{frame}

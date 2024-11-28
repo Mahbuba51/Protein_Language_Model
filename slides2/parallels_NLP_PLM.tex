@@ -1,0 +1,152 @@
+\begin{frame}
+    \frametitle{Parallels of NLP and PLM}
+
+    \begin{columns}
+        % Left Column
+        \column{0.5\textwidth}
+        \begin{center}
+            \begin{tikzpicture}[
+                node distance=0.3cm and 1.2cm, % Further reduced node distance
+                align=center,
+                rounded corners,
+                every node/.style={font=\tiny}, % Reduced font size
+                input/.style={draw,  shading=axis, left color=blue!40, right color=white!30, text width=1cm, minimum height=0.5cm}, % Reduced width and height
+                model/.style={draw, shading=axis, left color=blue!50, right color=cyan!30, text width=1.5cm, minimum height=4.5cm, align=center}, % Reduced model node height
+                output/.style={draw,   shading=axis, left color=cyan!30, right color=white!30,, text width=1cm, minimum height=0.5cm}, % Reduced width
+                arrow/.style={-Stealth, thick},
+                scale=0.8 % Scaled down the whole diagram
+            ]
+
+            % Input nodes (vertically aligned with equal spacing)
+            \visible<2->{
+                \node[input] (books) {Books};
+                }
+            \visible<2->{
+                \node[input, below=0.5cm of books] (wikipedia) {Wikipedia};
+                }
+            \visible<2->{
+                \node[input, below=0.5cm of wikipedia] (reddit) {Reddit};
+                }
+            \visible<2->{
+                \node[input, below=0.5cm of reddit] (github) {GitHub};
+                }            
+
+            % Model node (with taller height)
+            \visible<1->{
+                 \node[model, right=1.5cm of wikipedia.south east, yshift=-0.5cm, anchor=center] (model) {English\\ Language\\ Model};
+                }
+           
+
+            % Output nodes (vertically aligned with equal spacing)
+            \visible<3->{
+                \node[output, right=1.5cm of model.north, yshift=-.5cm] (nlg) {Natural Language\\ Generation};
+                \node[output, below=0.5cm of nlg] (summ) {Summari-\\zation};
+                \node[output, below=0.5cm of summ] (sentiment) {Sentiment\\ Analysis};
+                \node[output, below=0.5cm of sentiment] (codegen) {Code\\ Generation};
+                }
+            
+
+            % Headings for sections
+            \visible<2->{
+                \node[above=0.3cm of books, yshift=0.3cm] {Data}; % Above inputs
+                }
+            \visible<1->{
+                 \node[above=0.3cm of model, yshift=0.3cm] {Model}; % Above model
+                }
+            \visible<3->{
+                 \node[above=0.3cm of nlg] {Task}; % Above outputs
+
+                }
+
+           
+ 
+            % Arrows from inputs to model
+            \visible<2->{
+                \draw[arrow] (books.east) -- (model.west |- books.east);
+                \draw[arrow] (wikipedia.east) -- (model.west |- wikipedia.east);
+                \draw[arrow] (reddit.east) -- (model.west |- reddit.east);
+                \draw[arrow] (github.east) -- (model.west |- github.east);
+                }
+            
+
+            % Arrows from model to outputs
+            \visible<3->{
+                \draw[arrow] (model.north east) -- (nlg.west);
+                \draw[arrow] (model.east |- summ.west) -- (summ.west);
+                \draw[arrow] (model.east |- sentiment.west) -- (sentiment.west);
+                \draw[arrow] (model.south east) -- (codegen.west);
+                }
+            
+
+            \end{tikzpicture}
+        \end{center}
+
+        % Right Column (Duplicate for customization)
+        \column{0.5\textwidth}
+        \begin{center}
+            \begin{tikzpicture}[
+                node distance=0.3cm and 1.2cm, % Further reduced node distance
+                align=center,
+                rounded corners,
+                every node/.style={font=\tiny}, % Reduced font size
+                input/.style={draw,   shading=axis, left color=blue!30, right color=white!30,, text width=1cm, minimum height=0.5cm}, % Reduced width and height
+                model/.style={draw, shading=axis, left color=blue!30, right color=purple!30, text width=1.5cm, minimum height=4.5cm, align=center}, % Reduced model node height
+                output/.style={draw,  shading=axis, left color=purple!30, right color=white!30,, text width=1.3cm, minimum height=0.5cm}, % Reduced width
+                arrow/.style={-Stealth, thick},
+                scale=0.8 % Scaled down the whole diagram
+            ]
+
+            % Input nodes (vertically aligned with equal spacing)
+            \visible<4->{
+                 \node[input] (books) {NCBI};
+                \node[input, below=0.5cm of books] (wikipedia) {GISAID};
+                \node[input, below=0.5cm of wikipedia] (reddit) {PDB};
+                \node[input, below=0.5cm of reddit] (github) {SAbDab};
+                }
+           
+
+            % Model node (with taller height)
+            \visible<1->{
+                \node[model, right=1.5cm of wikipedia.south east, yshift=-0.5cm, anchor=center] (model) {Protein\\ Language\\ Model};
+                }
+            
+
+            % Output nodes (vertically aligned with equal spacing)
+            \visible<5->{
+                \node[output, right=1.5cm of model.north, yshift=-.5cm] (nlg) {Structure\\ determination};
+                \node[output, below=0.5cm of nlg] (summ) {Protein-\\protein\\interactions};
+                \node[output, below=0.5cm of summ] (sentiment) {Mutation\\ effect\\prediction};
+                \node[output, below=0.5cm of sentiment] (codegen) {De novo\\ protein\\design};
+                }
+            
+             % Headings for sections
+            \visible<2->{
+                \node[above=0.3cm of books, yshift=0.3cm] {Data}; % Above inputs
+                }
+            \visible<1->{
+                 \node[above=0.3cm of model, yshift=0.3cm] {Model}; % Above model
+                }
+            \visible<3->{
+                 \node[above=0.3cm of nlg] {Task}; % Above outputs
+
+                }
+
+            \visible<4->{
+                \draw[arrow] (books.east) -- (model.west |- books.east);
+                \draw[arrow] (wikipedia.east) -- (model.west |- wikipedia.east);
+                \draw[arrow] (reddit.east) -- (model.west |- reddit.east);
+                \draw[arrow] (github.east) -- (model.west |- github.east);
+                }
+
+            % Arrows from model to outputs
+             \visible<5->{
+                \draw[arrow] (model.north east) -- (nlg.west);
+                \draw[arrow] (model.east |- summ.west) -- (summ.west);
+                \draw[arrow] (model.east |- sentiment.west) -- (sentiment.west);
+                \draw[arrow] (model.south east) -- (codegen.west);
+                }
+
+            \end{tikzpicture}
+        \end{center}
+    \end{columns}
+\end{frame}

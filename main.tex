@@ -1,0 +1,52 @@
+\documentclass{beamer}
+\usepackage{tikz}
+\usepackage{animate}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\usetikzlibrary{graphs, shapes.geometric, positioning}% Enable the shadings library
+\usetikzlibrary{backgrounds, fit, shapes.misc, shadows, shapes.symbols}
+
+\usetikzlibrary{shadings}
+
+\usetikzlibrary{ arrows.meta,}
+\usepackage{theme/beamer-s4ndm4n}
+
+\usepackage{xcolor}
+% \usepackage{helvet} % Use a modern sans-serif font
+% \renewcommand{\familydefault}{\sfdefault}
+\definecolor{darkblue}{RGB}{0, 71, 171}
+\definecolor{lightblue}{RGB}{173, 216, 230}
+\definecolor{lightblue2}{RGB}{158, 213, 253}
+\definecolor{pblue}{RGB}{117, 154, 254}
+\definecolor{greyblue}{RGB}{121, 141, 194}
+
+
+\title{Protein Language Model}
+\author[]{Abony,Sinthia}
+\date{28/11/24}
+
+\begin{document}
+\input{slides/intro}
+\input{slides2/plm_start}
+\input{slides2/LM}
+\input{slides2/how_lang_model}
+\input{slides2/lang_of_proteins}
+\input{slides2/parallels_NLP_PLM}
+\input{slides2/task_specific_plm}
+\input{slides2/alphafold_intro}
+\input{slides2/alphafold_flow1}
+\input{slides2/alphafold_flow2}
+
+\input{slides/ProtBERT}
+\input{slides/ProtBERT_Algo}
+\input{slides/Alphafold_VS_PrortBERT}
+\input{slides/comparative_graphs}
+\input{slides/applications.tex}
+\input{slides/challenges.tex}
+\input{slides/future_directions}
+\input{slides/conclusion.tex}
+
+
+
+\end{document}

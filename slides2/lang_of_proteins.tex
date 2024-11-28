@@ -1,0 +1,76 @@
+\usetikzlibrary{calc}
+\usetikzlibrary{positioning}
+\usetikzlibrary{fit}
+
+\begin{frame}
+    \frametitle{The Language of Proteins}
+
+    \begin{columns}
+        % Left Column: Bullet Points
+        \column{0.5\textwidth}
+        \begin{itemize}
+            \item <1-> Proteins are made of \textbf{amino acid sequences} (primary structure) that form the "words" of their language.
+            \item <2-> These sequences govern how they fold into shapes (secondary and tertiary structures) that determine their functions.
+            \item <3-> Protein language has rules ("grammar") that dictate folding and functionality.
+        \end{itemize}
+
+        % Right Column: Flow Chart
+        \column{0.5\textwidth}
+        \begin{center}
+            \begin{tikzpicture}[scale=0.9, every node/.style={scale=0.9}]
+                % Amino acid sequence block
+                \visible<1->{
+                    \node[draw, fill=lightblue!50, rounded corners, text=darkblue, align=center, minimum width=5cm] (sequence) at (0, 3) {
+                        \textbf{Sequence:} \\ 
+                        "MET-LYS-ALA-THR-GLY..."
+                    };
+                }
+                % Secondary structure block
+                \visible<2->{
+                    \node[draw, fill=lightblue!30, rounded corners, text=darkblue, align=center, minimum width=5cm, below=.7cm of sequence] (secondary) {
+                        \textbf{Secondary Structure:} \\
+                        $\alpha$-Helices, $\beta$-Sheets
+                    };
+                }
+                % Tertiary structure block
+                \visible<2->{
+                    \node[draw, fill=lightblue!10, rounded corners, text=darkblue, align=center, minimum width=5cm, below=.7cm of secondary] (tertiary) {
+                        \textbf{Tertiary Structure:} \\
+                        Folded Protein Shape
+                    };
+                }
+                 % Grammar and Syntax
+                 \visible<3->{
+                    \node[draw, dashed, fill=white, text=darkblue,align=center, minimum width=6cm, below=.7cm of tertiary] (grammar){
+                        \textbf{Grammar \& Syntax:} \\
+                        Rules of how amino acids\\ combine and fold
+                    };
+                }
+                % Rounded rectangle around the first three nodes
+                % \begin{scope}[visible on=<3->]
+                %     \draw[rounded corners, thick, darkblue]
+                %         ($(sequence.north west) + (-0.5, 0.3)$) rectangle 
+                %         ($(tertiary.south east) + (0.5, -0.3)$);
+
+                % \end{scope}
+                \visible<3->{
+                    \begin{scope}[]
+                        \node[draw, rounded corners, thick, darkblue, fit=(sequence) (tertiary), inner sep=0.5cm] (rect) {};
+                    \end{scope}
+                }
+                % Connections (arrows)
+                \visible<2->{
+                    \draw[->, thick, darkblue] (sequence.south) -- (secondary.north);
+                }
+                \visible<2->{
+                    \draw[->, thick, darkblue] (secondary.south) -- (tertiary.north);
+                }
+                \visible<3->{
+                    \draw[->, thick, dashed, darkblue] (rect.south) -- (grammar.north);
+                }
+
+                
+            \end{tikzpicture}
+        \end{center}
+    \end{columns}
+\end{frame}
