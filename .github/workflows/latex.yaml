@@ -20,9 +20,9 @@ jobs:
         root_file: main.tex  # Replace with your main LaTeX file
 
     - name: Set up LaTeX
-    uses: dante-ev/latex-action@v2
-    with:
-      extra_packages: |
-        beamer
-        pgf
-        hyperref
+      uses: dante-ev/latex-action@v2
+      with:
+        extra_packages: |
+          beamer
+          pgf
+          hyperref
