@@ -1,0 +1,15 @@
+name: Build LaTeX document
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up LaTeX
+        uses: dante-ev/latex-action@v2
+      - name: Compile LaTeX
+        run: latexmk -pdf filename.tex
